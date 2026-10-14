@@ -1,0 +1,14 @@
+name = "linux_demo"
+description = "SDL Linux demo ported to Ada Portal"
+version = "0.1.0-dev"
+authors = ["AdaPAL Team"]
+licenses = "Apache-2.0"
+
+executables = ["linux_demo"]
+project-files = ["linux_demo.gpr"]
+
+[[depends-on]]
+portal = "*"
+
+[[pins]]
+portal = { path = "../.." }

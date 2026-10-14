@@ -1,0 +1,18 @@
+with "portal";
+project Linux_Demo is
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Exec_Dir use "bin";
+   for Create_Missing_Dirs use "True";
+   for Main use ("linux_demo.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada") use
+        ("-gnat2022", "-gnata", "-gnatwa", "-gnatwe",
+         "-gnatVa", "-g", "-O1");
+   end Compiler;
+
+   package Binder is
+      for Default_Switches ("Ada") use ("-Es");
+   end Binder;
+end Linux_Demo;
