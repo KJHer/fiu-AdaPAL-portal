@@ -16,7 +16,17 @@ private package Portal.Xlib is
    subtype Window is XID;
    subtype Atom   is XID;
    subtype Cursor is XID;
+   subtype Pixmap is XID;
    type Bool is new int;
+
+   type XColor is record
+      Pixel : unsigned_long;
+      Red   : unsigned_short;
+      Green : unsigned_short;
+      Blue  : unsigned_short;
+      Flags : char;
+      Pad   : char;
+   end record with Convention => C;
 
    Null_Display : constant Display_Ptr := System.Null_Address;
 
@@ -139,6 +149,12 @@ private package Portal.Xlib is
      with Import, Convention => C, External_Name => "XOpenDisplay";
    procedure XCloseDisplay (D : Display_Ptr)
      with Import, Convention => C, External_Name => "XCloseDisplay";
+   function XResourceManagerString (D : Display_Ptr) return chars_ptr
+     with Import, Convention => C, External_Name => "XResourceManagerString";
+   function XDisplayWidth (D : Display_Ptr; Screen : int) return int
+     with Import, Convention => C, External_Name => "XDisplayWidth";
+   function XDisplayWidthMM (D : Display_Ptr; Screen : int) return int
+     with Import, Convention => C, External_Name => "XDisplayWidthMM";
    function XDefaultScreen (D : Display_Ptr) return int
      with Import, Convention => C, External_Name => "XDefaultScreen";
    function XDefaultRootWindow (D : Display_Ptr) return Window
@@ -207,6 +223,19 @@ private package Portal.Xlib is
 
    function XCreateFontCursor (D : Display_Ptr; Shape : unsigned) return Cursor
      with Import, Convention => C, External_Name => "XCreateFontCursor";
+   function XCreateBitmapFromData
+     (D : Display_Ptr; W : Window; Bits : System.Address;
+      Width, Height : unsigned) return Pixmap
+     with Import, Convention => C, External_Name => "XCreateBitmapFromData";
+   function XCreatePixmapCursor
+     (D : Display_Ptr; Source, Mask : Pixmap;
+      Foreground, Background : access XColor;
+      Hot_X, Hot_Y : unsigned) return Cursor
+     with Import, Convention => C, External_Name => "XCreatePixmapCursor";
+   function XFreePixmap (D : Display_Ptr; Image : Pixmap) return int
+     with Import, Convention => C, External_Name => "XFreePixmap";
+   function XFreeCursor (D : Display_Ptr; C : Cursor) return int
+     with Import, Convention => C, External_Name => "XFreeCursor";
    procedure XDefineCursor (D : Display_Ptr; W : Window; C : Cursor)
      with Import, Convention => C, External_Name => "XDefineCursor";
    procedure XUndefineCursor (D : Display_Ptr; W : Window)

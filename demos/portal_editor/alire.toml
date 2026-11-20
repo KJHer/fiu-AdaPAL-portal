@@ -1,0 +1,13 @@
+name = "portal_editor"
+description = "Small portable AdaPAL pixel editor showcase"
+version = "0.1.0-dev"
+authors = ["AdaPAL Team"]
+licenses = "Apache-2.0"
+executables = ["portal_editor"]
+project-files = ["portal_editor.gpr"]
+
+[[depends-on]]
+portal = "*"
+
+[[pins]]
+portal = { path = "../.." }

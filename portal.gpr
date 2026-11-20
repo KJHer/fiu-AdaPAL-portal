@@ -8,6 +8,7 @@ library project Portal is
    --  and is what CI uses. "x11" needs libX11 (apt: libx11-dev).
    --  "win32" needs nothing beyond GNAT on Windows.
 
+   for Languages use ("Ada", "C");
    for Library_Name use "portal";
    for Library_Version use "0.1.0";
    for Library_Kind use "static";
